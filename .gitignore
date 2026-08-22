@@ -1,0 +1,5 @@
+#Folder ko ignore karne ke liye
+node_modules/
+
+# Files ko ignore karne ke liye
+.env
