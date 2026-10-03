@@ -8,4 +8,4 @@ function connectToDb(){
 }
 
 
-module.exports=connectToDbnpm
+module.exports=connectToDb
