@@ -1,54 +1,117 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 html,
-body,
-#root{
-  height: 100%;
-  width: 100%;
-}
-html{
-  background-color: #212121;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+body {
+  min-height: 100%;
+  background-color: #1d2a24;
+  color: #f3efe6;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-.notes{
+/* ---------- Create form ---------- */
+.form {
+  padding: 1.5rem 3rem 0.5rem;
+}
+
+.note-create-form {
   display: flex;
-  gap: 1rem;
-  padding-block: 1rem;
-  padding-inline: 3rem;
   flex-wrap: wrap;
+  gap: 0.75rem;
 }
-.note{
-background-color: #494949;
-padding: 1rem;
- border-radius: 0.7rem;
- max-width: 20rem;
- color: wheat;
-}
-.note-create-form{
-  display: flex;
-  gap: 1rem;
-  padding-inline: 3rem;
-  padding-block: 1rem;
-}
-.form{
-  width: 100%;
-  height: 80px;
-  background-color: rgb(10, 48, 48);
- display: flex;
- align-items: center;
- justify-content: space-evenly;
 
+.note-create-form input {
+  flex: 1 1 14rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #4a5d53;
+  border-radius: 0.4rem;
+  background: #263830;
+  color: inherit;
+  font: inherit;
 }
-.form input{
-  border-radius:2px ;
-  
- 
+
+.note-create-form input::placeholder {
+  color: #9fb0a6;
 }
-.btn{
-  background-color: rgb(79, 147, 86);
+
+/* ---------- Notes list ---------- */
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 3rem 2rem;
+}
+
+.note {
+  width: 18rem;
+  padding: 1rem 1.1rem;
+  background-color: #263830;
+  border-radius: 0.6rem;
+  border-left: 5px solid #e8c872;
+}
+
+.note h1 {
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.note p {
+  margin-bottom: 0.9rem;
+  line-height: 1.4;
+  color: #d8d3c6;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Buttons ---------- */
+button {
+  padding: 0.45rem 0.9rem;
+  border: none;
+  border-radius: 0.4rem;
+  background: #e8c872;
+  color: #1d2a24;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #e8c872;
+  outline-offset: 2px;
+}
+
+/* Edit button (note ke andar, bina class wala) */
+.note button {
+  margin-right: 0.6rem;
+}
+
+/* Delete button (note ke andar, class btn wala) */
+.note .btn {
+  background: #e0715a;
+  color: #fff;
+  margin-right: 0;
+}
+
+/* Create Notes button (form ke andar) */
+.form .btn {
+  background: #e8c872;
+  color: #1d2a24;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+  .form,
+  .notes {
+    padding-inline: 1rem;
+  }
+
+  .note {
+    width: 100%;
+  }
 }

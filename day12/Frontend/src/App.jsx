@@ -7,6 +7,7 @@ import axios from "axios"
 const App = () => {
 
   const [notes, setnotes] = useState([])
+
 function submitHandler(e){
     e.preventDefault()
 const form =e.target
@@ -39,6 +40,15 @@ const form =e.target
       fetchNOtes()
     })
   }
+  function updatehandler(noteId,olddescription){
+    const newdescription = prompt("newdescription", olddescription)
+    if (!newdescription) return
+      
+    axios.patch("http://localhost:3000/api/notes/"+noteId, { description: newdescription })
+    .then(res=>{
+      fetchNOtes()
+    })
+  }
 
   return (
 
@@ -56,6 +66,9 @@ const form =e.target
       <div className="note">
         <h1>{note.title}</h1>
         <p>{note.description}</p>
+        <button onClick={() => updatehandler(note._id, note.description)}>
+  Edit
+</button>
         <button className='btn' onClick={()=>{
           handleDeleteNote(note._id)
         }}>Delete Notes</button>

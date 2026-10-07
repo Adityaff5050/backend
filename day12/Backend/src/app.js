@@ -5,6 +5,8 @@ const cors = require("cors")
 const noteModel = require("./model/note.model")
 app.use(cors())
 
+const path =require("path")
+app.use(express.static("./public"))
 
 //post /api/notes
 app.post("/api/notes",async(req,res)=>{
@@ -49,4 +51,8 @@ app.patch("/api/notes/:id",async(req,res)=>{
     })
 
     })
+  
+app.use("*name", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"))
+})
 module.exports=app
