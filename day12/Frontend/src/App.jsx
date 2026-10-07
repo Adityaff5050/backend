@@ -13,7 +13,7 @@ function submitHandler(e){
 const form =e.target
     const {title,description}=e.target.elements
 
-    axios.post("http://localhost:3000/api/notes",{
+    axios.post("https://backend-jxuw.onrender.com/",{
       title:title.value,
       description:description.value
     })
@@ -23,7 +23,7 @@ const form =e.target
     })
   }
   function fetchNOtes(){
-    axios.get("http://localhost:3000/api/notes")
+    axios.get("https://backend-jxuw.onrender.com/")
     .then((res)=>{
       setnotes(res.data.notes)
     })
@@ -34,7 +34,7 @@ const form =e.target
   },[])
   
   function handleDeleteNote(noteId){
-    axios.delete("http://localhost:3000/api/notes/"+noteId)
+    axios.delete("https://backend-jxuw.onrender.com/"+noteId)
     .then(res=>{
       console.log(res.data)
       fetchNOtes()
@@ -44,7 +44,7 @@ const form =e.target
     const newdescription = prompt("newdescription", olddescription)
     if (!newdescription) return
       
-    axios.patch("http://localhost:3000/api/notes/"+noteId, { description: newdescription })
+    axios.patch("https://backend-jxuw.onrender.com//notes/"+noteId, { description: newdescription })
     .then(res=>{
       fetchNOtes()
     })
