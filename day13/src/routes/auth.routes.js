@@ -1,25 +1,39 @@
-const express= require("express")
-const userModel=require("../model/user.model")
-const authRouter =express.Router()
+const express = require("express")
+const jwt = require("jsonwebtoken")
+const userModel = require("../model/user.model")
 
-authRouter.post("/register",async(req,res)=>{
-const {email,name,password} =req.body
+const authRouter = express.Router()
 
-const isUserAlreadyExists =await userModel.findOne({email})
-if(isUserAlreadyExists){
-    return res.status(400).json({
-        msg:"user alredy exist plz. try again with diff. email"
+authRouter.post("/register", async (req, res) => {
+  try {
+    const { email, name, password } = req.body
+
+    const isUserAlreadyExists = await userModel.findOne({ email })
+    if (isUserAlreadyExists) {
+      return res.status(400).json({
+        msg: "user already exists, try again with a different email",
+      })
+    }
+
+    const user = await userModel.create({
+      email,
+      name,
+      password,
     })
-}
-const user= await userModel.create({
-    email,password,name
-})
-res.status(201).json({
-    msg : "user registered",
-    user
-})
+
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET
+    )
+    res.cookie("jwt_token",token)
+    res.status(201).json({
+      msg: "user registered",
+      user: { id: user._id, name: user.name, email: user.email },
+      token,
+    })
+  } catch (err) {
+    res.status(500).json({ msg: "something went wrong" })
+  }
 })
 
-
-
-module.exports =authRouter
+module.exports = authRouter
